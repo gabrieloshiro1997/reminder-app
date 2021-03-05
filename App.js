@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, TextInput, View, Text } from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  FlatList,
+} from 'react-native';
 
 export default function App() {
-  const [reminder, setReminder] = useState();
+  const [reminder, setReminder] = useState('');
   const [reminders, setReminders] = useState([]);
+  const [countReminders, setCountReminders] = useState(0);
 
   const getReminder = (reminder) => {
     setReminder(reminder);
   };
 
   const addReminder = () => {
-    setReminders((reminders) => [reminder, ...reminders]);
+    console.log(reminder);
+    setCountReminders(countReminders + 1);
+    setReminders((reminders) => [
+      { key: countReminders.toString(), value: reminder },
+      ...reminders,
+    ]);
     setReminder('');
   };
 
@@ -28,12 +41,15 @@ export default function App() {
           <Button title='+' onPress={addReminder} />
         </View>
       </View>
-      <View style={{ alignItems: 'center' }}>
-        {reminders.map((reminder, key) => (
-          <View style={styles.item}>
-            <Text key={key}>{reminder}</Text>
-          </View>
-        ))}
+      <View style={{ width: '80%', alignSelf: 'center' }}>
+        <FlatList
+          data={reminders}
+          renderItem={(reminder) => (
+            <View style={styles.item}>
+              <Text>{reminder.item.value}</Text>
+            </View>
+          )}
+        />
       </View>
     </View>
   );
@@ -58,7 +74,6 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   item: {
-    width: '80%',
     padding: 12,
     backgroundColor: '#CCC',
     borderColor: 'black',
