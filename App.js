@@ -18,7 +18,6 @@ export default function App() {
   };
 
   const addReminder = () => {
-    console.log(reminder);
     setCountReminders(countReminders + 1);
     setReminders((reminders) => [
       { key: countReminders.toString(), value: reminder },
