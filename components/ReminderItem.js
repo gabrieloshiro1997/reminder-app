@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableNativeFeedback } from 'react-native';
 
 const ReminderItem = (props) => {
   return (
-    <View style={styles.item}>
-      <Text>{props.reminder}</Text>
-    </View>
+    <TouchableNativeFeedback
+      onPress={() => props.deleteReminder(props.keyToDelete)}
+    >
+      <View style={styles.item}>
+        <Text>{props.reminder}</Text>
+      </View>
+    </TouchableNativeFeedback>
   );
 };
 const styles = StyleSheet.create({

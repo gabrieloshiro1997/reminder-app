@@ -15,6 +15,14 @@ export default function App() {
     ]);
   };
 
+  const deleteReminder = (keyDeleted) => {
+    setReminders((currentReminders) => {
+      return currentReminders.filter((reminder) => {
+        return reminder.key !== keyDeleted;
+      });
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ReminderInput addReminder={addReminder} />
@@ -22,7 +30,11 @@ export default function App() {
         <FlatList
           data={reminders}
           renderItem={(reminder) => (
-            <ReminderItem reminder={reminder.item.value} />
+            <ReminderItem
+              reminder={reminder.item.value}
+              deleteReminder={deleteReminder}
+              keyToDelete={reminder.item.key}
+            />
           )}
         />
       </View>
