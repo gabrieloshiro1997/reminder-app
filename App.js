@@ -7,6 +7,7 @@ import {
   Text,
   FlatList,
 } from 'react-native';
+import ReminderItem from './components/ReminderItem.js';
 
 export default function App() {
   const [reminder, setReminder] = useState('');
@@ -44,9 +45,7 @@ export default function App() {
         <FlatList
           data={reminders}
           renderItem={(reminder) => (
-            <View style={styles.item}>
-              <Text>{reminder.item.value}</Text>
-            </View>
+            <ReminderItem reminder={reminder.item.value} />
           )}
         />
       </View>
@@ -71,14 +70,5 @@ const styles = StyleSheet.create({
   },
   inputButton: {
     width: '80%',
-  },
-  item: {
-    padding: 12,
-    backgroundColor: '#CCC',
-    borderColor: 'black',
-    borderWidth: 1,
-    marginBottom: 8,
-    borderRadius: 8,
-    alignItems: 'center',
   },
 });
